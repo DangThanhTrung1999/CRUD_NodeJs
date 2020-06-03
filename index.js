@@ -10,23 +10,23 @@ app.use(bodyParser.urlencoded({ extended: true }));
 
 const apiRoute = require("./router/person.route");
 
-// const mongoose = require("mongoose");
-// mongoose.connect(process.env.MONGO_URL).then(
-//   () => {
-//     console.log("connect DB ok");
-//   },
-//   (err) => {
-//     console.log(`Connect error: ${err}`);
-//   }
-// );
-const MongoClient = require('mongodb').MongoClient;
-const uri = "mongodb+srv://root:<password>@cluster0-kzjpf.mongodb.net/test?retryWrites=true&w=majority";
-const client = new MongoClient(uri, { useNewUrlParser: true });
-client.connect(err => {
-  const collection = client.db("test").collection("devices");
-  // perform actions on the collection object
-  client.close();
-});
+const mongoose = require("mongoose");
+mongoose.connect(process.env.MONGO_URL).then(
+  () => {
+    console.log("connect DB ok");
+  },
+  (err) => {
+    console.log(`Connect error: ${err}`);
+  }
+);
+// const MongoClient = require('mongodb').MongoClient;
+// const uri = "mongodb+srv://root:<password>@cluster0-kzjpf.mongodb.net/test?retryWrites=true&w=majority";
+// const client = new MongoClient(uri, { useNewUrlParser: true });
+// client.connect(err => {
+//   const collection = client.db("test").collection("devices");
+//   // perform actions on the collection object
+//   client.close();
+// });
 app.get("/", (req, res) => {
   res.send("Hello");
 });
