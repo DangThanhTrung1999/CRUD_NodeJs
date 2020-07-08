@@ -4,21 +4,29 @@ module.exports = {
   getAll: async (req, res) => {
     let { page, limit } = req.query;
     let persons = await Person.find();
-    let length = persons.length;
+    let totalRows = persons.length;
     if (page && limit) {
       let startIndex = (page - 1) * limit;
       let endIndex = page * limit;
       persons = persons.slice(startIndex, endIndex);
       res.json({
         persons,
-        totalRow:length,
+        pagination: {
+          page,
+          limit,
+          totalRows,
+        },
       });
       return;
     }
 
     res.json({
       persons,
-      totalRow: length,
+      pagination: {
+        page,
+        limit,
+        totalRows,
+      },
     });
   },
   getById: async (req, res) => {
