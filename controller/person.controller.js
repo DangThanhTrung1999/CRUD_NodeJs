@@ -36,6 +36,13 @@ module.exports = {
       success: "ok",
     });
   },
+  getByName: async (req, res) => {
+    let person = await Person.find({ name: new RegExp(req.query.name, "i") });
+    res.json({
+      person,
+      size: person.length,
+    });
+  },
   create: async (req, res) => {
     let person = await Person.create(req.body);
     res.json({
