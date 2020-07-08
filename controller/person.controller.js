@@ -3,22 +3,22 @@ const Person = require("../models/person.model");
 module.exports = {
   getAll: async (req, res) => {
     let { page, limit } = req.query;
-
     let persons = await Person.find();
+    let length = persons.length;
     if (page && limit) {
       let startIndex = (page - 1) * limit;
       let endIndex = page * limit;
       persons = persons.slice(startIndex, endIndex);
       res.json({
         persons,
-        size: persons.length,
+        totalRow:length,
       });
       return;
     }
 
     res.json({
       persons,
-      size: persons.length,
+      totalRow: length,
     });
   },
   getById: async (req, res) => {
